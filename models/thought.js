@@ -43,12 +43,11 @@ const ThoughtSchema = new Schema(
             default: Date.now,
             get: createdAtVal => dateFormat(createdAtVal)
         }, 
-        username: [//(The user that created this thought)
+        username: //(The user that created this thought)
             {
-                type: Schema.Types.ObjectId,
-                ref: 'User'
-            }
-        ],
+                type: String,
+                required: 'Username is required'
+            },
         //reactions (These are like replies)
         reactions: [ReactionSchema]//Array of nested documents created with the reactionSchema
     },

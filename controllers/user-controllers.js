@@ -36,7 +36,7 @@ const userController = {
             .catch(err => {
             console.log(err);
             res.sendStatus(400);
-      });
+        });
     },
 
     //create an user
@@ -65,17 +65,31 @@ const userController = {
             .catch(err => res.json(err));
     },
     //add a new friend to a user's list
-    createFriend({ body }, res) {
-        User.create(body)
-            .then(dbFriend => res.json(dbFriend))
+    addFriend({ params, body }, res) {
+        User.findOneAndUpdate(
+                { _id: params.userId },
+                { $push: { friends: body } },
+                { new: true }
+            )  
+            .then(dbUser => {
+                if (!dbUser) {
+                    res.status(404).json({ message: 'No user found with this id!'});
+                    return;
+                }
+                res.json(dbUser);
+            })
             .catch(err => res.json(err));
     },
     //delete a friend from a user's friend list
     deleteFriend({ params }, res) {
-        User.findOneAndDelete({ _id: params.id })
-            .then(dbFriend => res.json(dbFriend))
+        User.findOneAndUpdate(
+            { _id: params.friendId },
+            { $pull: { friends: { friendId: params.friendId } } },
+            { new: true }  
+        )
+            .then(dbUser => res.json(dbUser))
             .catch(err => res.json(err));
-    },
+    }
 };
 
 module.exports = userController;

@@ -74,7 +74,8 @@ const thoughtController = {
         },
         //add a new reaction stored in a single thought's reactions array field
         addReaction({ params, body }, res) {
-            Thought.findOneAndUpdate({ _id: params.thoughtId }, { $push: { reactions: body} }, { new: true })
+            Thought.findOneAndUpdate(
+                { _id: params.id }, { $push: { reactions: body} }, { new: true })
                 .then(dbUser => {
                     if (!dbUser) {
                         res.status(404).json({ message: 'No user found with this id!'});
@@ -87,9 +88,9 @@ const thoughtController = {
         //delete to pull and remove a reaction by the reactions's reactionId
         removeReaction({ params }, res) {
             Thought.findOneAndUpdate(
-              { _id: params.thoughtId },
-              { $pull: { reactions: { reactionId: params.reactionId } } },
-              { new: true }
+                { _id: params.thoughtid },
+                { $pull: { reactions: { reactionId: params.reactionId } } },
+                { new: true }
             )
               .then(dbUser => res.json(dbUser))
               .catch(err => res.json(err));

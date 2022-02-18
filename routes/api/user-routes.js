@@ -16,14 +16,15 @@ router
 
 
 // /api/users/:userId/friends
-router
-.route('/:id/friends')
-.post(addFriend)
+//router
+//.route('/:id/friends')
+//.post(addFriend)
 
 
 // /api/users/:userId/friends/:friendId
 router
-.route('/:id/friends/:friendid')
+.route('/:id/friends/:friendId')
+.post(addFriend)
 .delete(deleteFriend)
 
 module.exports = router;

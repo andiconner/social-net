@@ -25,7 +25,8 @@ SO THAT my website can handle large amounts of unstructured data
 -	Clone https://github.com/andiconner/social-net.git
 -   Run npm i express mongoose to install all of the dependencies;
 -	On the terminal command-line type “npm start” to start the app;
--	Go to Insomnia to test the routes, sta
+-	Go to Insomnia to test the routes.
+- [Walkthrough Video](https://watch.screencastify.com/v/aSXEhulOgFXbyJ9v7ITL)
 
 
 ## Screenshots

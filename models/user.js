@@ -22,7 +22,6 @@ const UserSchema = new Schema ({
     friends: [
         {
             type: Schema.Types.ObjectId,
-            default: () => new Types.ObjectId(),
             ref: 'User'
         }
     ]
